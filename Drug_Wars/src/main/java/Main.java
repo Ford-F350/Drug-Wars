@@ -1,15 +1,11 @@
 public class Main {
     public static void main(String[] args) {
-        Weed test = new Weed();
-        Weed test2 = new Weed(100, 0, 5);
+        TrenchCoat inventory = new TrenchCoat(0,2000);
+        Weed weed = new Weed(100,0,0);
+        Events event = new Events();
         for (int i = 0; i < 20; i++) {
-            System.out.println(test.getAmount() + " " + test2.getAmount());
-            System.out.println(test.getPrice() + " " + test2.getPrice());
-            System.out.println("");
-            test.updateWeed();
-            test2.updateWeed();
-            test.setLean(0);
-            test2.setLean(0);
+            System.out.println(inventory.getMoney() + "  " + weed.getPrice());
+            event.eventRoll(inventory, weed);
         }
     }
 }

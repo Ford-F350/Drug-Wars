@@ -1,48 +1,40 @@
-public class Weed {
-
-    private Market weedMarket;
-    private int amount;
+public class Weed extends Drugs {
 
     public Weed() {
-        this.weedMarket = new Market();
-        this.amount = 0;
+
     }
 
     public Weed(int price, double lean, int amount) {
-        this.weedMarket = new Market(price, lean);
-        if (amount < 0) {
-            this.amount = 0;
-        } else {
-            this.amount = amount;
-        }
+        super(price, lean, amount);
     }
 
     public void updateWeed() {
-        weedMarket.updateMarket();
+        super.updateDrug();
     }
 
     public int getAmount() {
-        return amount;
+
+        return super.getAmount();
     }
 
     public void setAmount(int amount) {
-        this.amount = amount;
+        super.setAmount(amount);
     }
 
     public int getPrice() {
-        return weedMarket.getPrice();
+        return super.getPrice();
     }
 
     public double getLean() {
-        return weedMarket.getLean();
+        return super.getLean();
     }
 
     public void setPrice(int price) {
-        this.weedMarket.setPrice(price);
+        super.setPrice(price);
     }
 
     public void setLean(double lean) {
-        this.weedMarket.setLean(lean);
+        super.setLean(lean);
     }
 
 }
