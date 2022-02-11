@@ -13,7 +13,6 @@ public class Weed extends Drugs {
     }
 
     public int getAmount() {
-
         return super.getAmount();
     }
 
