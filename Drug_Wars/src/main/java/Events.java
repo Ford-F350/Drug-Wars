@@ -4,18 +4,24 @@ public class Events {
 
     }
 
-    public void eventRoll(TrenchCoat inv, Drugs drugs) {
+    public void eventRoll(Drugs drugs) {
         int i = (int)(Math.random() * 9) + 1;
         if (i == 1) {
-            moneyGain(inv);
-        } else if (i == 2) {
-            moneyLoss(inv);
-        } else if (i == 3) {
             priceGain(drugs);
-        } else if (i == 4){
+        } else if (i == 2){
             priceLoss(drugs);
         }
     }
+
+    public void eventRoll(TrenchCoat inv) {
+        int i = (int)(Math.random() * 9) + 1;
+        if (i == 1) {
+            moneyGain(inv);
+        } else if (i == 2){
+            moneyLoss(inv);
+        }
+    }
+
 
     private void moneyLoss(TrenchCoat inv) {
         inv.setMoney(inv.getMoney() - ((int)(Math.random() * 200) + 1));

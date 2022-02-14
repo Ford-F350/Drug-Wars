@@ -1,42 +1,41 @@
 public class City {
 
-    protected int location;
-    protected double localLean;
-    protected int weedPrice;
+    //city class for keeping local prices and market lean
+
+    protected Weed Weed;
+    protected Events Events;
 
     public City() {
-        this.location = 0;
-        this.localLean = 0;
-        this.weedPrice = 0;
+        this.Weed = new Weed();
+        this.Events = new Events();
     }
 
-    public City(int location, double localLean, int weedPrice) {
-        this.location = location;
-        this.localLean = localLean;
-        this.weedPrice = weedPrice;
-    }
-
-    public int getLocation() {
-        return location;
-    }
-
-    public void setLocation(int location) {
-        this.location = location;
+    public City(double localLean, int weedPrice) {
+        this.Weed = new Weed();
+        this.Events = new Events();
     }
 
     public double getLocalLean() {
-        return localLean;
+        return Weed.getLean();
     }
 
     public void setLocalLean(double localLean) {
-        this.localLean = localLean;
+        this.Weed.setLean(localLean);
     }
 
-    public int getWeedPrice() {
-        return weedPrice;
+    public int getPrice() {
+        return Weed.getPrice();
     }
 
-    public void setWeedPrice(int weedPrice) {
-        this.weedPrice = weedPrice;
+    public void setPrice(int price) {
+        this.Weed.setPrice(price);
+    }
+
+    public void rollMarket(){
+        this.Weed.updateDrug();
+    }
+
+    public void rollEvent(){
+        this.Events.eventRoll(Weed);
     }
 }
