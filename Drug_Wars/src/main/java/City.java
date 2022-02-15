@@ -1,18 +1,27 @@
 public class City {
 
-    //city class for keeping local prices and market lean
-
+    protected int location;
     protected double localLean;
     protected int weedPrice;
 
     public City() {
+        this.location = 0;
         this.localLean = 0;
         this.weedPrice = 0;
     }
 
-    public City(double localLean, int weedPrice) {
+    public City(int location, double localLean, int weedPrice) {
+        this.location = location;
         this.localLean = localLean;
         this.weedPrice = weedPrice;
+    }
+
+    public int getLocation() {
+        return location;
+    }
+
+    public void setLocation(int location) {
+        this.location = location;
     }
 
     public double getLocalLean() {
