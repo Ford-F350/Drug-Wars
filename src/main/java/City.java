@@ -2,16 +2,16 @@ public class City {
 
     //city class for keeping local prices and market lean
 
-    protected Weed Weed;
+    protected Drugs Weed;
     protected Events Events;
 
     public City() {
-        this.Weed = new Weed();
+        this.Weed = new Drugs();
         this.Events = new Events();
     }
 
     public City(double localLean, int weedPrice) {
-        this.Weed = new Weed();
+        this.Weed = new Drugs(weedPrice,localLean,0,"Weed");
         this.Events = new Events();
     }
 

@@ -1,24 +1,21 @@
+import java.util.ArrayList;
+
 public class TrenchCoat {
 
-    private int weedAmount;
-    private int money;
+    // keeps track of all item the player has
+
+    protected ArrayList<Guns> Guns;
+    protected ArrayList<Drugs> Drugs;
+    protected int money;
 
     public TrenchCoat() {
-        this.weedAmount = 0;
         this.money = 0;
+        this.Guns = new ArrayList<>();
+        this.Drugs = new ArrayList<>();
     }
 
-    public TrenchCoat(int weedAmount, int money) {
-        this.weedAmount = Math.max(weedAmount, 0);
+    public TrenchCoat(int money) {
         this.money = money;
-    }
-
-    public int getWeedAmount() {
-        return weedAmount;
-    }
-
-    public void setWeedAmount(int weedAmount) {
-        this.weedAmount = weedAmount;
     }
 
     public int getMoney() {

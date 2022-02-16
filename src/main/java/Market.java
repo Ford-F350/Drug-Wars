@@ -2,6 +2,9 @@ import java.lang.Math;
 
 public class Market {
 
+    // simulates a market by randomly using prices relative to there current price
+    // lean can sway them to be more likely to go up or down in price
+
     private int price;
     private double lean;
 
@@ -19,6 +22,8 @@ public class Market {
         this.lean = lean;
     }
 
+    // new price = currentPrice + (random number between (-0.5 and 0.5) + lean) * CurrentPrice
+    // increases and decreases in price are greater depending on current price
     public void updateMarket() {
         price += (Math.random() + lean - .5) * price;
         if (price == 0) {

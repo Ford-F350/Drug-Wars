@@ -1,5 +1,7 @@
 public class Events {
 
+    //Picks Random things that will change the prices of drugs, money owned, and other random events
+
     public Events(){
 
     }
