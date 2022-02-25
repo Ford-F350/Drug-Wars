@@ -19,4 +19,27 @@ public class Cops {
 
     }
 
+    public Guns getGun() {
+        return Gun;
+    }
+
+    public void setGun(Guns gun) {
+        Gun = gun;
+    }
+
+    public int getHealth() {
+        return health;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public String getName() {
+        return Name;
+    }
+
+    public void setName(String name) {
+        Name = name;
+    }
 }

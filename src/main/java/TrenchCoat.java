@@ -4,22 +4,26 @@ public class TrenchCoat {
 
     // keeps track of all item the player has
     // also tracks players health. default is 10
+    // default max invSpace is 100;
 
     protected ArrayList<Guns> Guns;
     protected ArrayList<Drugs> Drugs;
     protected int money;
     protected int health;
+    protected int invSpace;
 
     public TrenchCoat() {
         this.money = 0;
         this.Guns = new ArrayList<>();
         this.Drugs = new ArrayList<>();
         this.health = 10;
+        this.invSpace = 100;
     }
 
-    public TrenchCoat(int money, int health) {
+    public TrenchCoat(int money, int health, int invSpace) {
         this.money = money;
         this.health = Math.max(0,health);
+        this.invSpace = Math.max(0, invSpace);
     }
 
     // Gun functions
@@ -68,7 +72,7 @@ public class TrenchCoat {
         this.money = money;
     }
 
-    //Health functions
+    //Health / invSpace functions
 
     public int getHealth() {
         return health;
@@ -78,4 +82,11 @@ public class TrenchCoat {
         this.health = health;
     }
 
+    public int getInvSpace() {
+        return invSpace;
+    }
+
+    public void setInvSpace(int invSpace) {
+        this.invSpace = invSpace;
+    }
 }
