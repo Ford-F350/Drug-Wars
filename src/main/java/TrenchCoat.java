@@ -11,19 +11,27 @@ public class TrenchCoat {
     protected int money;
     protected int health;
     protected int invSpace;
+    private static TrenchCoat single_instance = null;
 
-    public TrenchCoat() {
-        this.money = 0;
+    private TrenchCoat() {
+        this.money = 2000;
         this.Guns = new ArrayList<>();
         this.Drugs = new ArrayList<>();
         this.health = 10;
         this.invSpace = 100;
     }
 
-    public TrenchCoat(int money, int health, int invSpace) {
+    private TrenchCoat(int money, int health, int invSpace) {
         this.money = money;
         this.health = Math.max(0,health);
         this.invSpace = Math.max(0, invSpace);
+    }
+
+    public static TrenchCoat getInstance() {
+        if (single_instance == null) {
+            single_instance = new TrenchCoat();
+        }
+        return single_instance;
     }
 
     // Gun functions

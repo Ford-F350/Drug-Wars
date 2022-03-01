@@ -8,10 +8,11 @@ public class GameController {
     protected LoanShark loanShark;
     //singleton class
     private static GameController single_instance = null;
+    protected static Scanner scan = new Scanner(System.in);
 
     private GameController() {
         this.Cities = new CityController();
-        this.Coat = new TrenchCoat();
+        this.Coat = TrenchCoat.getInstance();
         this.Events = new Events();
         this.loanShark = new LoanShark();
     }
@@ -25,10 +26,9 @@ public class GameController {
 
 
     public static void main(String[] args) {
-        Scanner scan = new Scanner(System.in);
         System.out.println("press enter to start");
         //cheat code
-        if (scan.toString().equals("testCheatCode")) {
+        if (scan.nextLine().equals("testCheatCode")) {
             customStart();
         } else {
             getInstance();
@@ -36,7 +36,7 @@ public class GameController {
     }
 
     private static void customStart() {
-        //custom game start values
+        getInstance();
     }
 
     public CityController getCities() {

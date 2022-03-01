@@ -14,6 +14,10 @@ public class LoanShark {
         this.InterestRate = InterestRate;
     }
 
+    public void updateDebt() {
+        this.Debt *= (1 + InterestRate/100);
+    }
+
     public int getDebt() {
         return Debt;
     }
