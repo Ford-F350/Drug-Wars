@@ -1,8 +1,8 @@
 public class Cops {
 
-    protected Guns Gun;
-    protected int health;
-    protected String Name;
+    private Guns Gun;
+    private int health;
+    private String Name;
 
     //Cops have one gun with unlimited ammo and default of 3 health
 

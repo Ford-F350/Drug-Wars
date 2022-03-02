@@ -1,9 +1,9 @@
 public class Guns {
 
-    protected int power;
-    protected int ammo;
-    protected int accuracy;
-    protected String name;
+    private int power;
+    private int ammo;
+    private int accuracy;
+    private String name;
 
     // power scale 1 - 10
     // accuracy scale 1 - 10

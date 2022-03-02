@@ -1,10 +1,10 @@
 public class Drugs {
 
-    protected Market market;
-    protected int price;
-    protected double lean;
-    protected int amount;
-    protected String name;
+    private Market market;
+    private int price;
+    private double lean;
+    private int amount;
+    private String name;
 
     // keeps track of its own price, lean, and amount owned
     // every drug has its own market class for price management

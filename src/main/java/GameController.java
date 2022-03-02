@@ -2,18 +2,17 @@ import java.util.Scanner;
 
 public class GameController {
 
-    protected CityController Cities;
-    protected TrenchCoat Coat;
-    protected Events Events;
-    protected LoanShark loanShark;
+    private CityController Cities;
+    private TrenchCoat Coat;
+    private Events Events;
+    private LoanShark loanShark;
     //singleton class
     private static GameController single_instance = null;
-    protected static Scanner scan = new Scanner(System.in);
+    private static Scanner scan = new Scanner(System.in);
 
     private GameController() {
-        this.Cities = new CityController();
-        this.Coat = TrenchCoat.getInstance();
-        this.Events = new Events();
+        this.Cities = Cities.getCityControllerInstance();
+        this.Coat = TrenchCoat.getTrenchCoatInstance();
         this.loanShark = new LoanShark();
     }
 
@@ -53,13 +52,5 @@ public class GameController {
 
     public void setCoat(TrenchCoat coat) {
         Coat = coat;
-    }
-
-    public Events getEvents() {
-        return Events;
-    }
-
-    public void setEvents(Events events) {
-        Events = events;
     }
 }

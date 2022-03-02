@@ -6,11 +6,11 @@ public class TrenchCoat {
     // also tracks players health. default is 10
     // default max invSpace is 100;
 
-    protected ArrayList<Guns> Guns;
-    protected ArrayList<Drugs> Drugs;
-    protected int money;
-    protected int health;
-    protected int invSpace;
+    private ArrayList<Guns> Guns;
+    private ArrayList<Drugs> Drugs;
+    private int money;
+    private int health;
+    private int invSpace;
     private static TrenchCoat single_instance = null;
 
     private TrenchCoat() {
@@ -27,7 +27,7 @@ public class TrenchCoat {
         this.invSpace = Math.max(0, invSpace);
     }
 
-    public static TrenchCoat getInstance() {
+    public static TrenchCoat getTrenchCoatInstance() {
         if (single_instance == null) {
             single_instance = new TrenchCoat();
         }

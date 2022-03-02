@@ -1,8 +1,8 @@
 public class LoanShark {
 
-    protected int Debt;
+    private int Debt;
     //InterestRate is per day. default is 5%
-    protected int InterestRate;
+    private int InterestRate;
 
     public LoanShark() {
         this.Debt = 0;

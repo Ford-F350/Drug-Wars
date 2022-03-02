@@ -1,14 +1,17 @@
+import java.util.ArrayList;
+
 public class City {
 
     //city class for keeping local prices and market lean
 
-    protected Drugs Weed;
-    protected Drugs Cocaine;
-    protected Drugs Heroin;
-    protected Drugs Acid;
-    protected Drugs Speed;
-    protected Drugs Ludes;
-    protected Events Events;
+    private Drugs Weed;
+    private Drugs Cocaine;
+    private Drugs Heroin;
+    private Drugs Acid;
+    private Drugs Speed;
+    private Drugs Ludes;
+    private Events Events;
+    private ArrayList<Drugs> DrugList;
 
     public City() {
         this.Weed = new Drugs();
@@ -17,50 +20,69 @@ public class City {
         this.Speed = new Drugs();
         this.Ludes = new Drugs();
         this.Cocaine = new Drugs();
-        this.Events = new Events();
+        this.Events = Events.getEventsInstance();
         defaultStart();
+        DrugList.add(this.Weed);
+        DrugList.add(this.Heroin);
+        DrugList.add(this.Acid);
+        DrugList.add(this.Speed);
+        DrugList.add(this.Ludes);
+        DrugList.add(this.Cocaine);
+
     }
 
     /*default starting drug stats
 
                 Price  Lean
        1 Weed   | 80  |  .15
-       2 Heroin | 90  | .1
+       2 Heroin | 100  | .1
        3 Acid   | 60  | .2
        4 Speed  | 40  | .3
        5 Ludes  | 50  | .25
-       6 Cocaine| 100 | 0
+       6 Cocaine| 120 | 0
 
      */
     private void defaultStart() {
-        this.Weed.setPrice(100);
+        this.Weed.setPrice(80);
+        this.Weed.setName("Weed");
+        this.Weed.setLean(.15);
+
+        this.Heroin.setPrice(100);
+        this.Heroin.setName("Heroin");
+        this.Heroin.setLean(.1);
+
+        this.Acid.setPrice(60);
+        this.Acid.setName("Acid");
+        this.Acid.setLean(.2);
+
+        this.Speed.setPrice(40);
+        this.Speed.setName("Speed");
+        this.Speed.setLean(.3);
+
+        this.Ludes.setPrice(50);
+        this.Ludes.setName("Ludes");
+        this.Ludes.setLean(.25);
+
+        this.Cocaine.setPrice(120);
+        this.Cocaine.setName("Cocaine");
+        this.Cocaine.setLean(0);
+
     }
 
-    private Drugs getDrug(int i) {
-        return this.Weed; // undone
+    public Drugs getDrug(String name) {
+        for (Drugs e: this.DrugList) {
+            if (e.getName().equals(name)) {
+                return e;
+            }
+        }
+        return null;
     }
 
-    public double getLocalLean(String DrugName) {
-        return 0.0; //undone
+    public ArrayList<Drugs> getDrugList() {
+        return DrugList;
     }
 
-    public void setLocalLean(double localLean) {
-        this.Weed.setLean(localLean);
-    }
-
-    public int getPrice() {
-        return Weed.getPrice();
-    }
-
-    public void setPrice(int price) {
-        this.Weed.setPrice(price);
-    }
-
-    public void rollMarket(){
-        this.Weed.updateDrug();
-    }
-
-    public void rollEvent(){
-        this.Events.eventRoll(Weed);
+    public void rollEvent(Drugs drug){
+        this.Events.eventRoll(drug);
     }
 }

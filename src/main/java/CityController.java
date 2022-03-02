@@ -6,26 +6,25 @@ public class CityController {
     // 1 = theBronx
     // 2 = Brooklyn
 
-    protected int currentLocation;
-    protected City Manhattan;
-    protected City TheBronx;
-    protected City Brooklyn;
+   private int currentLocation;
+   private City Manhattan;
+   private City TheBronx;
+   private City Brooklyn;
+   private static CityController single_instance = null;
 
-    public CityController() {
+    private CityController() {
         this.currentLocation = 0;
         this.Manhattan = new City();
         this.Brooklyn = new City();
         this.TheBronx = new City();
     }
 
-    public CityController(int currentLocation) {
-        if (currentLocation < 0 || currentLocation > 2){
-            this.currentLocation = 0;
-        } else
-        this.currentLocation = currentLocation;
-        this.Manhattan = new City();
-        this.Brooklyn = new City();
-        this.TheBronx = new City();
+
+    public CityController getCityControllerInstance() {
+        if (single_instance == null) {
+            single_instance = new CityController();
+        }
+        return single_instance;
     }
 
     public void changeCity(int location) {
@@ -39,28 +38,28 @@ public class CityController {
         return currentLocation;
     }
 
-    public double getLocalLean() {
-        return getCurrentCity().getLocalLean();
+    public double getLocalLean(String name) {
+        return getCurrentCity().getDrug(name).getLean();
     }
 
-    public void setLocalLean(double localLean) {
-        getCurrentCity().setLocalLean(localLean);
+    public void setLocalLean(String name, double localLean) {
+        getCurrentCity().getDrug(name).setLean(localLean);
     }
 
-    public int getPrice() {
-        return getCurrentCity().getPrice();
+    public int getPrice(String name) {
+        return getCurrentCity().getDrug(name).getPrice();
     }
 
-    public void setPrice(int price) {
-        getCurrentCity().setPrice(price);
+    public void setPrice(String name, int price) {
+        getCurrentCity().getDrug(name).setPrice(price);
     }
 
-    public void rollMarket() {
-        getCurrentCity().rollMarket();
+    public void rollMarket(String name) {
+        getCurrentCity().getDrug(name).updateDrug();
     }
 
-    public void rollEventDrug() {
-        getCurrentCity().rollEvent();
+    public void rollEventDrug(String name) {
+        getCurrentCity().rollEvent(getCurrentCity().getDrug(name));
     }
 
     public City getCurrentCity() {
