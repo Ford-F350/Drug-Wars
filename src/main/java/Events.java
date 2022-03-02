@@ -35,7 +35,7 @@ public class Events {
         } else if (i == 2){
             moneyLoss(inv);
         } else if (i == 3){
-
+            //TODO: add more drug functions
         }
     }
 
@@ -64,7 +64,8 @@ public class Events {
     }
 
     private void DrugGain(TrenchCoat inv) {
-        inv.getDrugs().get((int)(Math.random() * inv.DrugCount() + 1));
+        int i = (int)(Math.random() * inv.DrugCount() + 1);
+        inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() + ((int)((Math.random() - .5) * 50) + 1));
     }
 
     private void moneyLoss(TrenchCoat inv) {
