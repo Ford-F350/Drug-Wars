@@ -1,49 +1,67 @@
 
-public class Events {
+public class RandomAction {
 
     private int eventsRolled;
-    private static Events single_instance = null;
+    private static RandomAction single_instance = null;
 
     //Picks Random things that will change the prices of drugs, money owned, and other random events
 
-    private Events(){
+    private RandomAction(){
         this.eventsRolled = 0;
     }
 
-    public Events getEventsInstance() {
+    public RandomAction getRandomActionInstance() {
         if (single_instance == null) {
-            single_instance = new Events();
+            single_instance = new RandomAction();
         }
         return single_instance;
     }
 
-
-    public void eventRoll(Drugs drugs) {
+    public int ActionRoll(Drugs drugs) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             priceGain(drugs);
+            this.eventsRolled++;
+            return 1;
         } else if (i == 2){
             priceLoss(drugs);
+            this.eventsRolled++;
+            return 2;
         }
         this.eventsRolled++;
+        return 2;
     }
 
-    public void eventRoll(TrenchCoat inv) {
+    public int ActionRoll(TrenchCoat inv) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             moneyGain(inv);
+            this.eventsRolled++;
+            return 1;
         } else if (i == 2){
             moneyLoss(inv);
+            this.eventsRolled++;
+            return 2;
         } else if (i == 3){
-            //TODO: add more drug functions
+            drugGain(inv);
+            this.eventsRolled++;
+            return 3;
+        } else if (i == 4){
+            drugLoss(inv);
+            this.eventsRolled++;
+            return 4;
         }
+        this.eventsRolled++;
+        return -1;
     }
 
     public int copRoll() {
         int i = (int)(Math.random() * 10)+ 1;
         if (i == 1) {
             copFight();
+            this.eventsRolled++;
         }
+        this.eventsRolled++;
         return -1;
     }
 
@@ -63,9 +81,17 @@ public class Events {
         return -1;
     }
 
-    private void DrugGain(TrenchCoat inv) {
+    private void drugGain(TrenchCoat inv) {
         int i = (int)(Math.random() * inv.DrugCount() + 1);
-        inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() + ((int)((Math.random() - .5) * 50) + 1));
+        inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() + ((int)(Math.random() * 10) + 1));
+    }
+
+    private void drugLoss(TrenchCoat inv) {
+        int i = (int)(Math.random() * inv.DrugCount() + 1);
+        inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() - ((int)(Math.random() * 10) + 1));
+        if (inv.getDrugsAtIndex(i).getAmount() < 0) {
+            inv.getDrugsAtIndex(i).setAmount(0);
+        }
     }
 
     private void moneyLoss(TrenchCoat inv) {

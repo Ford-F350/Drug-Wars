@@ -10,7 +10,7 @@ public class City {
     private Drugs Acid;
     private Drugs Speed;
     private Drugs Ludes;
-    private Events Events;
+    private RandomAction randomAction;
     private ArrayList<Drugs> DrugList;
 
     public City() {
@@ -20,7 +20,7 @@ public class City {
         this.Speed = new Drugs();
         this.Ludes = new Drugs();
         this.Cocaine = new Drugs();
-        this.Events = Events.getEventsInstance();
+        this.randomAction = randomAction.getRandomActionInstance();
         defaultStart();
         DrugList.add(this.Weed);
         DrugList.add(this.Heroin);
@@ -80,9 +80,5 @@ public class City {
 
     public ArrayList<Drugs> getDrugList() {
         return DrugList;
-    }
-
-    public void rollEvent(Drugs drug){
-        this.Events.eventRoll(drug);
     }
 }

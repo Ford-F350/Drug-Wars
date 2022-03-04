@@ -34,6 +34,11 @@ public class TrenchCoat {
         return single_instance;
     }
 
+    private int checkInvSpace(int i) {
+        if ((invSpace + i) > invSpace);
+        return -1;
+    }
+
     // Gun functions
 
     public void addGun(Guns gun) {

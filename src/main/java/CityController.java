@@ -58,9 +58,6 @@ public class CityController {
         getCurrentCity().getDrug(name).updateDrug();
     }
 
-    public void rollEventDrug(String name) {
-        getCurrentCity().rollEvent(getCurrentCity().getDrug(name));
-    }
 
     public City getCurrentCity() {
         if (this.currentLocation == 0) {

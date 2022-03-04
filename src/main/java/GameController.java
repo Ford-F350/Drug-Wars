@@ -4,7 +4,7 @@ public class GameController {
 
     private CityController Cities;
     private TrenchCoat Coat;
-    private Events Events;
+    private RandomAction RandomAction;
     private LoanShark loanShark;
     //singleton class
     private static GameController single_instance = null;
@@ -34,8 +34,12 @@ public class GameController {
         }
     }
 
-    private static void customStart() {
+    private void customStart() {
         getInstance();
+        System.out.println("Enter Player Health");
+        this.Coat.setHealth(scan.nextInt());
+        System.out.println("Enter Player Inventory Space");
+        this.Coat.setInvSpace(scan.nextInt());
     }
 
     public CityController getCities() {
