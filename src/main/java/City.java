@@ -10,7 +10,6 @@ public class City {
     private Drugs Acid;
     private Drugs Speed;
     private Drugs Ludes;
-    private RandomAction randomAction;
     private ArrayList<Drugs> DrugList;
 
     public City() {
@@ -20,7 +19,6 @@ public class City {
         this.Speed = new Drugs();
         this.Ludes = new Drugs();
         this.Cocaine = new Drugs();
-        this.randomAction = randomAction.getRandomActionInstance();
         defaultStart();
         DrugList.add(this.Weed);
         DrugList.add(this.Heroin);

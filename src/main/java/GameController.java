@@ -2,18 +2,17 @@ import java.util.Scanner;
 
 public class GameController {
 
-    private CityController Cities;
-    private TrenchCoat Coat;
-    private RandomAction RandomAction;
-    private LoanShark loanShark;
+    private int DaysPast;
     //singleton class
     private static GameController single_instance = null;
     private static Scanner scan = new Scanner(System.in);
 
     private GameController() {
-        this.Cities = Cities.getCityControllerInstance();
-        this.Coat = TrenchCoat.getTrenchCoatInstance();
-        this.loanShark = new LoanShark();
+        CityController.getCityControllerInstance();
+        TrenchCoat.getTrenchCoatInstance();
+        RandomAction.getRandomActionInstance();
+        LoanShark loanShark = new LoanShark();
+        this.DaysPast = 0;
     }
 
     public static GameController getInstance() {
@@ -27,34 +26,42 @@ public class GameController {
     public static void main(String[] args) {
         System.out.println("press enter to start");
         //cheat code
-        if (scan.nextLine().equals("testCheatCode")) {
+        if (scan.nextLine().equals("a")) {
             customStart();
         } else {
             getInstance();
         }
     }
 
-    private void customStart() {
+    /*
+    Day Structure:
+    - RandomAction may happen (not on first day)
+    - Choice of buying, selling, borrowing cash, seeing prices
+      When buying or selling there is a chane a cop will show up
+    - end day by moving cites or waiting till next day
+     */
+    public void dayStart() {
+        if (this.DaysPast > 0) {
+            int i = RandomAction.getRandomActionInstance().getRandomDrugIndex();
+            RandomAction.getRandomActionInstance().ActionRoll(TrenchCoat.getTrenchCoatInstance().getDrugsAtIndex(i));
+        }
+    }
+
+    private static void customStart() {
         getInstance();
         System.out.println("Enter Player Health");
-        this.Coat.setHealth(scan.nextInt());
+        single_instance.getCoat().setHealth(scan.nextInt());
         System.out.println("Enter Player Inventory Space");
-        this.Coat.setInvSpace(scan.nextInt());
+        single_instance.getCoat().setInvSpace(scan.nextInt());
+        System.out.println("Enter Starting Money");
+        single_instance.getCoat().setMoney(scan.nextInt());
     }
 
     public CityController getCities() {
-        return Cities;
-    }
-
-    public void setCities(CityController cities) {
-        Cities = cities;
+        return CityController.getCityControllerInstance();
     }
 
     public TrenchCoat getCoat() {
-        return Coat;
-    }
-
-    public void setCoat(TrenchCoat coat) {
-        Coat = coat;
+        return TrenchCoat.getTrenchCoatInstance();
     }
 }

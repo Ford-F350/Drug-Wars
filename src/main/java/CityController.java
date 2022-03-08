@@ -20,7 +20,7 @@ public class CityController {
     }
 
 
-    public CityController getCityControllerInstance() {
+    public static CityController getCityControllerInstance() {
         if (single_instance == null) {
             single_instance = new CityController();
         }

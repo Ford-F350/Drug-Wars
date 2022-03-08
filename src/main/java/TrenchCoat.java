@@ -11,6 +11,7 @@ public class TrenchCoat {
     private int money;
     private int health;
     private int invSpace;
+    private int MaxInvSpace;
     private static TrenchCoat single_instance = null;
 
     private TrenchCoat() {
@@ -18,13 +19,14 @@ public class TrenchCoat {
         this.Guns = new ArrayList<>();
         this.Drugs = new ArrayList<>();
         this.health = 10;
-        this.invSpace = 100;
+        this.invSpace = 0;
+        this.MaxInvSpace = 100;
     }
 
-    private TrenchCoat(int money, int health, int invSpace) {
+    private TrenchCoat(int money, int health, int MaxInvSpace) {
         this.money = money;
         this.health = Math.max(0,health);
-        this.invSpace = Math.max(0, invSpace);
+        this.invSpace = Math.max(0, MaxInvSpace);
     }
 
     public static TrenchCoat getTrenchCoatInstance() {
@@ -35,8 +37,10 @@ public class TrenchCoat {
     }
 
     private int checkInvSpace(int i) {
-        if ((invSpace + i) > invSpace);
-        return -1;
+        if ((invSpace + i) > MaxInvSpace) {
+            return -1;
+        }
+        return 1;
     }
 
     // Gun functions

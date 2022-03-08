@@ -10,11 +10,25 @@ public class RandomAction {
         this.eventsRolled = 0;
     }
 
-    public RandomAction getRandomActionInstance() {
+    public static RandomAction getRandomActionInstance() {
         if (single_instance == null) {
             single_instance = new RandomAction();
         }
         return single_instance;
+    }
+
+    public int getRandomDrugIndex() {
+        return (int)(Math.random() * TrenchCoat.getTrenchCoatInstance().DrugCount());
+    }
+
+    public int ActionRoll(Drugs drugs, TrenchCoat coat) {
+        if (ActionRoll(coat) == -1) {
+           if(ActionRoll(drugs) == -1) {
+               return -1;
+           }
+           return 2;
+        }
+        return 1;
     }
 
     public int ActionRoll(Drugs drugs) {
@@ -29,7 +43,7 @@ public class RandomAction {
             return 2;
         }
         this.eventsRolled++;
-        return 2;
+        return -1;
     }
 
     public int ActionRoll(TrenchCoat inv) {
@@ -82,12 +96,12 @@ public class RandomAction {
     }
 
     private void drugGain(TrenchCoat inv) {
-        int i = (int)(Math.random() * inv.DrugCount() + 1);
+        int i = getRandomDrugIndex();
         inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() + ((int)(Math.random() * 10) + 1));
     }
 
     private void drugLoss(TrenchCoat inv) {
-        int i = (int)(Math.random() * inv.DrugCount() + 1);
+        int i = getRandomDrugIndex();
         inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() - ((int)(Math.random() * 10) + 1));
         if (inv.getDrugsAtIndex(i).getAmount() < 0) {
             inv.getDrugsAtIndex(i).setAmount(0);
