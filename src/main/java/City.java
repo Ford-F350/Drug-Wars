@@ -4,28 +4,28 @@ public class City {
 
     //city class for keeping local prices and market lean
 
-    private Drugs Weed;
-    private Drugs Cocaine;
-    private Drugs Heroin;
-    private Drugs Acid;
-    private Drugs Speed;
-    private Drugs Ludes;
-    private ArrayList<Drugs> DrugList;
+    private Drugs weed;
+    private Drugs cocaine;
+    private Drugs heroin;
+    private Drugs acid;
+    private Drugs speed;
+    private Drugs drugs;
+    private ArrayList<Drugs> drugList = new ArrayList<>();
 
     public City() {
-        this.Weed = new Drugs();
-        this.Heroin = new Drugs();
-        this.Acid = new Drugs();
-        this.Speed = new Drugs();
-        this.Ludes = new Drugs();
-        this.Cocaine = new Drugs();
+        this.weed = new Drugs();
+        this.heroin = new Drugs();
+        this.acid = new Drugs();
+        this.speed = new Drugs();
+        this.drugs = new Drugs();
+        this.cocaine = new Drugs();
         defaultStart();
-        DrugList.add(this.Weed);
-        DrugList.add(this.Heroin);
-        DrugList.add(this.Acid);
-        DrugList.add(this.Speed);
-        DrugList.add(this.Ludes);
-        DrugList.add(this.Cocaine);
+        drugList.add(this.weed);
+        drugList.add(this.heroin);
+        drugList.add(this.acid);
+        drugList.add(this.speed);
+        drugList.add(this.drugs);
+        drugList.add(this.cocaine);
 
     }
 
@@ -41,34 +41,34 @@ public class City {
 
      */
     private void defaultStart() {
-        this.Weed.setPrice(80);
-        this.Weed.setName("Weed");
-        this.Weed.setLean(.15);
+        this.weed.setPrice(80);
+        this.weed.setName("Weed");
+        this.weed.setLean(.15);
 
-        this.Heroin.setPrice(100);
-        this.Heroin.setName("Heroin");
-        this.Heroin.setLean(.1);
+        this.heroin.setPrice(100);
+        this.heroin.setName("Heroin");
+        this.heroin.setLean(.1);
 
-        this.Acid.setPrice(60);
-        this.Acid.setName("Acid");
-        this.Acid.setLean(.2);
+        this.acid.setPrice(60);
+        this.acid.setName("Acid");
+        this.acid.setLean(.2);
 
-        this.Speed.setPrice(40);
-        this.Speed.setName("Speed");
-        this.Speed.setLean(.3);
+        this.speed.setPrice(40);
+        this.speed.setName("Speed");
+        this.speed.setLean(.3);
 
-        this.Ludes.setPrice(50);
-        this.Ludes.setName("Ludes");
-        this.Ludes.setLean(.25);
+        this.drugs.setPrice(50);
+        this.drugs.setName("Ludes");
+        this.drugs.setLean(.25);
 
-        this.Cocaine.setPrice(120);
-        this.Cocaine.setName("Cocaine");
-        this.Cocaine.setLean(0);
+        this.cocaine.setPrice(120);
+        this.cocaine.setName("Cocaine");
+        this.cocaine.setLean(0);
 
     }
 
     public Drugs getDrug(String name) {
-        for (Drugs e: this.DrugList) {
+        for (Drugs e: this.drugList) {
             if (e.getName().equals(name)) {
                 return e;
             }
@@ -77,6 +77,6 @@ public class City {
     }
 
     public ArrayList<Drugs> getDrugList() {
-        return DrugList;
+        return drugList;
     }
 }

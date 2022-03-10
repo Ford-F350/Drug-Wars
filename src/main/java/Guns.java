@@ -15,7 +15,7 @@ public class Guns {
         this.accuracy = 1;
         this.ammo = 0;
         this.power = 1;
-        this.name = "Null";
+        this.name = "null";
     }
 
     public Guns(int power, int accuracy, int ammo, String name) {

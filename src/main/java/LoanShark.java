@@ -1,36 +1,36 @@
 public class LoanShark {
 
-    private int Debt;
+    private int debt;
     //InterestRate is per day. default is 5%
-    private int InterestRate;
+    private int interestRate;
 
     public LoanShark() {
-        this.Debt = 0;
-        this.InterestRate = 5;
+        this.debt = 0;
+        this.interestRate = 5;
     }
 
     public LoanShark(int InterestRate) {
-        this.Debt = 0;
-        this.InterestRate = InterestRate;
+        this.debt = 0;
+        this.interestRate = InterestRate;
     }
 
     public void updateDebt() {
-        this.Debt *= (1 + InterestRate/100);
+        this.debt *= (1 + interestRate /100);
     }
 
     public int getDebt() {
-        return Debt;
+        return debt;
     }
 
     private void setDebt(int debt) {
-        Debt = debt;
+        this.debt = debt;
     }
 
     public int getInterestRate() {
-        return InterestRate;
+        return interestRate;
     }
 
     public void setInterestRate(int interestRate) {
-        InterestRate = interestRate;
+        this.interestRate = interestRate;
     }
 }

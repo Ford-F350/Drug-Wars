@@ -2,17 +2,18 @@ import java.util.Scanner;
 
 public class GameController {
 
-    private int DaysPast;
+    private int daysPast;
     //singleton class
     private static GameController single_instance = null;
     private static Scanner scan = new Scanner(System.in);
+    private LoanShark LoanShark;
 
     private GameController() {
         CityController.getCityControllerInstance();
         TrenchCoat.getTrenchCoatInstance();
         RandomAction.getRandomActionInstance();
-        LoanShark loanShark = new LoanShark();
-        this.DaysPast = 0;
+        this.LoanShark = new LoanShark();
+        this.daysPast = 0;
     }
 
     public static GameController getInstance() {
@@ -40,11 +41,13 @@ public class GameController {
       When buying or selling there is a chane a cop will show up
     - end day by moving cites or waiting till next day
      */
+    //TODO: make builder class for decision trees
     public void dayStart() {
-        if (this.DaysPast > 0) {
+        if (this.daysPast > 0) {
             int i = RandomAction.getRandomActionInstance().getRandomDrugIndex();
-            RandomAction.getRandomActionInstance().ActionRoll(TrenchCoat.getTrenchCoatInstance().getDrugsAtIndex(i));
+            RandomAction.getRandomActionInstance().actionRoll(TrenchCoat.getTrenchCoatInstance().getDrugsAtIndex(i));
         }
+
     }
 
     private static void customStart() {

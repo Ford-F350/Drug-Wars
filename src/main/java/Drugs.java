@@ -15,7 +15,7 @@ public class Drugs {
         this.amount = 0;
         this.price = 0;
         this.lean = 0;
-        this.name = "NULL";
+        this.name = "null";
     }
 
     public Drugs(int price, double lean, int amount,String name) {

@@ -21,9 +21,11 @@ public class RandomAction {
         return (int)(Math.random() * TrenchCoat.getTrenchCoatInstance().DrugCount());
     }
 
-    public int ActionRoll(Drugs drugs, TrenchCoat coat) {
-        if (ActionRoll(coat) == -1) {
-           if(ActionRoll(drugs) == -1) {
+    //TODO: Clean up Random Action class to be more easily usable and understandable
+
+    public int actionRoll(Drugs drugs, TrenchCoat coat) {
+        if (actionRoll(coat) == -1) {
+           if(this.actionRoll(drugs) == -1) {
                return -1;
            }
            return 2;
@@ -31,7 +33,7 @@ public class RandomAction {
         return 1;
     }
 
-    public int ActionRoll(Drugs drugs) {
+    public int actionRoll(Drugs drugs) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             priceGain(drugs);
@@ -46,7 +48,7 @@ public class RandomAction {
         return -1;
     }
 
-    public int ActionRoll(TrenchCoat inv) {
+    public int actionRoll(TrenchCoat inv) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             moneyGain(inv);
