@@ -47,10 +47,21 @@ public class TrenchCoat {
     }
 
     //TODO: finnish trench coat inventory overflow management
-//    private void invOverflow(int i) {
-//        System.out.println("TrenchCoat is full, either throw away" + ((this.invSpace + i) - this.maxInvSpace) + "items or only take what you can hold");
-//        System.out.println("1 to edit TrenchCoat | 2 to accept what you can hold");
-//    }
+    private void invOverflow(int i) {
+            System.out.println("TrenchCoat is full, either throw away" + ((this.invSpace + i) - this.maxInvSpace) + "items or only take what you can hold");
+            System.out.println("1 to edit TrenchCoat | 2 to accept what you can hold");
+            int input = scan.nextInt();
+            if (input != 1 && input != 2){
+                invalidInputException();
+            }
+            if (input == 1) {
+
+            }
+    }
+
+    private void invalidInputException() {
+        throw new IllegalArgumentException("Invalid Input, Please enter a valid input");
+    }
 
     // Gun functions
 
