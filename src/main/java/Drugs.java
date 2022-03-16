@@ -38,6 +38,14 @@ public class Drugs {
         this.amount = amount;
     }
 
+    public void addDrugAmount(int amount){
+        this.amount += amount;
+    }
+
+    public void removeDrugAmount(int amount) {
+        this.amount -= amount;
+    }
+
     public int getPrice() {
         return market.getPrice();
     }

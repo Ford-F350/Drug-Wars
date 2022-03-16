@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.lang.reflect.Method;
 
 public class TrenchCoat {
 
@@ -39,28 +40,105 @@ public class TrenchCoat {
         return single_instance;
     }
 
+    //returns how many items adding int i to inventory would overflow or 0 if it will fit
     public int checkInvSpace(int i) {
         if ((this.invSpace + i) > this.maxInvSpace) {
-            return -1;
+            return (this.invSpace + i) - this.maxInvSpace;
         }
-        return 1;
+        return 0;
     }
 
     //TODO: finnish trench coat inventory overflow management
-    private void invOverflow(int i) {
-            System.out.println("TrenchCoat is full, either throw away" + ((this.invSpace + i) - this.maxInvSpace) + "items or only take what you can hold");
-            System.out.println("1 to edit TrenchCoat | 2 to accept what you can hold");
-            int input = scan.nextInt();
-            if (input != 1 && input != 2){
-                invalidInputException();
-            }
-            if (input == 1) {
+    //always begin call with boolean being true
+    private void invOverflow(int addedItems) {
 
-            }
+        System.out.println("TrenchCoat is full, either throw away" + ((this.invSpace + addedItems) - this.maxInvSpace) + "items or only take what you can hold");
+        System.out.println("1 to remove items from TrenchCoat | 2 to accept what you can hold");
+
+        int input = testUserInput(2);
+
+        trenchCoatItemRemove(addedItems, input);
+
     }
 
-    private void invalidInputException() {
-        throw new IllegalArgumentException("Invalid Input, Please enter a valid input");
+    private void trenchCoatItemRemove(int addedItems, int input) {
+        if (input == 1) {
+            System.out.println("1 to remove Drugs | 2 to remove Guns | 3 to go back");
+            int CoatInput = testUserInput(3);
+
+            if (CoatInput == 1) {
+                System.out.println("Witch Drug would you like to remove");
+                for (Drugs drugs: this.drugList){
+                    System.out.print(drugs.getName() + ", ");
+                }
+                int drugIndex = getDrugPlayerIndex();
+
+                System.out.println("");
+                System.out.println("How much would you like to remove");
+                System.out.println(((this.invSpace + addedItems) - maxInvSpace) + "items left to remove");
+
+                getDrugsAtIndex(drugIndex).removeDrugAmount(testUserInput(getDrugsAtIndex(drugIndex).getAmount()));
+
+                System.out.println("Remove more or accept what you can hold");
+                System.out.println("1 to Remove more items | 2 to accept what you can hold");
+                if (testUserInput(2) == 1) {
+                    trenchCoatItemRemove(addedItems, 1);
+                } else trenchCoatItemRemove(addedItems, 2);
+            }
+
+            if (CoatInput == 2) {
+                //TODO: convert to work with guns instead of drugs
+//                System.out.println("Witch Gun would you like to remove");
+//                for (Guns guns: this.gunList){
+//                    System.out.print(guns.getName() + ", ");
+//                }
+//                int GunIndex = getDrugPlayerIndex();
+//
+//                System.out.println("");
+//                System.out.println("How much would you like to remove");
+//                System.out.println(((this.invSpace + addedItems) - maxInvSpace) + "items left to remove");
+//
+//                getDrugsAtIndex(drugIndex).removeDrugAmount(testUserInput(getDrugsAtIndex(drugIndex).getAmount()));
+//
+//                System.out.println("Remove more or accept what you can hold");
+//                System.out.println("1 to Remove more items | 2 to accept what you can hold");
+//                if (testUserInput(2) == 1) {
+//                    trenchCoatItemRemove(addedItems, 1);
+//                } else trenchCoatItemRemove(addedItems, 2);
+            }
+        }
+    }
+
+    public int getDrugPlayerIndex() {
+        while (true) {
+            try {
+                int index = 0;
+                String inputName = scan.nextLine();
+                for (Drugs e : this.drugList) {
+                    if (e.getName().equals(inputName)) {
+                        return index;
+                    }
+                    index++;
+                }
+                throw new IndexOutOfBoundsException();
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    public int testUserInput(int choicesAmount) {
+        while (true) {
+            try {
+                int input = scan.nextInt();
+                if (input >= 1 && input <= choicesAmount) {
+                    return input;
+                }
+                throw new ArithmeticException();
+            } catch (Exception e) {
+
+            }
+        }
     }
 
     // Gun functions

@@ -28,7 +28,7 @@ public class GameController {
         System.out.println("press enter to start");
         //cheat code
         if (scan.nextLine().equals("a")) {
-            customStart();
+            customStart(0, 0);
         } else {
             getInstance();
         }
@@ -50,14 +50,51 @@ public class GameController {
 
     }
 
-    private static void customStart() {
-        getInstance();
-        System.out.println("Enter Player Health");
-        single_instance.getCoat().setHealth(scan.nextInt());
-        System.out.println("Enter Player Inventory Space");
-        single_instance.getCoat().setInvSpace(scan.nextInt());
-        System.out.println("Enter Starting Money");
-        single_instance.getCoat().setMoney(scan.nextInt());
+    private static void customStart(int i, int i1) {
+        try {
+            getInstance();
+            if (i == 0) {
+                System.out.println("Enter Player Health");
+            }
+            i = 1;
+            if (i1 == 0) {
+                single_instance.getCoat().setHealth(scan.nextInt());
+            }
+            i1 = 1;
+            if (i == 1) {
+                System.out.println("Enter Player Inventory Space");
+            }
+            i = 2;
+            if (i1 == 1) {
+                single_instance.getCoat().setInvSpace(scan.nextInt());
+            }
+            i1 = 2;
+            if (i == 2) {
+                System.out.println("Enter Starting Money");
+            }
+            i = 3;
+            if (i1 == 2) {
+                single_instance.getCoat().setMoney(scan.nextInt());
+            }
+            i1 = 3;
+
+        } catch (Exception e) {
+            customStart(i, i1);
+        }
+    }
+
+    public int testUserInput(int choicesAmount) {
+        while (true) {
+            try {
+                int input = scan.nextInt();
+                if (input >= 1 && input <= choicesAmount) {
+                    return input;
+                }
+                throw new ArithmeticException();
+            } catch (Exception e) {
+
+            }
+        }
     }
 
     public CityController getCities() {
