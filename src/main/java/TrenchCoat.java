@@ -40,28 +40,27 @@ public class TrenchCoat {
         return single_instance;
     }
 
-    //returns how many items adding int i to inventory would overflow or 0 if it will fit
-    public int checkInvSpace(int i) {
-        if ((this.invSpace + i) > this.maxInvSpace) {
-            return (this.invSpace + i) - this.maxInvSpace;
+    //checks if a certiain amount of items will fit. if they dont it will prompt the user to make more space or accept what they can fit.
+    //returns a int of how many items can be added into the Trenchcoat, -1 for all items
+    public int checkInvSpace(int addedItems) {
+        if ((getInvSpace() + addedItems) > this.maxInvSpace) {
+            invOverflow(addedItems);
         }
-        return 0;
+        return -1;
     }
 
     //TODO: finnish trench coat inventory overflow management
-    //always begin call with boolean being true
-    private void invOverflow(int addedItems) {
+    private int invOverflow(int addedItems) {
 
-        System.out.println("TrenchCoat is full, either throw away" + ((this.invSpace + addedItems) - this.maxInvSpace) + "items or only take what you can hold");
+        System.out.println("TrenchCoat is full, either throw away" + ((getInvSpace() + addedItems) - this.maxInvSpace) + "items or only take what you can hold");
         System.out.println("1 to remove items from TrenchCoat | 2 to accept what you can hold");
 
         int input = testUserInput(2);
 
-        trenchCoatItemRemove(addedItems, input);
-
+        return trenchCoatItemRemove(addedItems, input);
     }
 
-    private void trenchCoatItemRemove(int addedItems, int input) {
+    private int trenchCoatItemRemove(int addedItems, int input) {
         if (input == 1) {
             System.out.println("1 to remove Drugs | 2 to remove Guns | 3 to go back");
             int CoatInput = testUserInput(3);
@@ -75,7 +74,7 @@ public class TrenchCoat {
 
                 System.out.println("");
                 System.out.println("How much would you like to remove");
-                System.out.println(((this.invSpace + addedItems) - maxInvSpace) + "items left to remove");
+                System.out.println(((getInvSpace() + addedItems) - maxInvSpace) + "items left to remove");
 
                 getDrugsAtIndex(drugIndex).removeDrugAmount(testUserInput(getDrugsAtIndex(drugIndex).getAmount()));
 
@@ -87,24 +86,48 @@ public class TrenchCoat {
             }
 
             if (CoatInput == 2) {
-                //TODO: convert to work with guns instead of drugs
-//                System.out.println("Witch Gun would you like to remove");
-//                for (Guns guns: this.gunList){
-//                    System.out.print(guns.getName() + ", ");
-//                }
-//                int GunIndex = getDrugPlayerIndex();
-//
-//                System.out.println("");
-//                System.out.println("How much would you like to remove");
-//                System.out.println(((this.invSpace + addedItems) - maxInvSpace) + "items left to remove");
-//
-//                getDrugsAtIndex(drugIndex).removeDrugAmount(testUserInput(getDrugsAtIndex(drugIndex).getAmount()));
-//
-//                System.out.println("Remove more or accept what you can hold");
-//                System.out.println("1 to Remove more items | 2 to accept what you can hold");
-//                if (testUserInput(2) == 1) {
-//                    trenchCoatItemRemove(addedItems, 1);
-//                } else trenchCoatItemRemove(addedItems, 2);
+                System.out.println("Witch Gun would you like to remove");
+                for (Guns guns: this.gunList){
+                    System.out.print(guns.getName() + ", ");
+                }
+                int gunIndex = getGunPlayerIndex();
+                this.gunList.remove(gunIndex);
+
+                System.out.println(((getInvSpace() + addedItems) - maxInvSpace) + "items left to remove");
+
+                System.out.println("Remove more or accept what you can hold");
+                System.out.println("1 to Remove more items | 2 to accept what you can hold");
+                if (testUserInput(2) == 1) {
+                    trenchCoatItemRemove(addedItems, 1);
+                } else trenchCoatItemRemove(addedItems, 2);
+            }
+        }
+        else {
+            if (getInvSpace() + addedItems <= this.maxInvSpace) {
+                System.out.println("Adding items to TrenchCoat");
+                return -1;
+            } else {
+                return this.maxInvSpace - getInvSpace();
+            }
+        }
+        //something went wrong if it returns this
+        return -2;
+    }
+
+    public int getGunPlayerIndex() {
+        while (true) {
+            try {
+                int index = 0;
+                String inputName = scan.nextLine();
+                for (Guns e: this.gunList) {
+                    if (e.getName().equals(inputName)){
+                        return index;
+                    }
+                    index++;
+                }
+                throw new IndexOutOfBoundsException();
+            } catch (Exception e) {
+
             }
         }
     }
@@ -114,7 +137,7 @@ public class TrenchCoat {
             try {
                 int index = 0;
                 String inputName = scan.nextLine();
-                for (Drugs e : this.drugList) {
+                for (Drugs e: this.drugList) {
                     if (e.getName().equals(inputName)) {
                         return index;
                     }
@@ -198,7 +221,15 @@ public class TrenchCoat {
     }
 
     public int getInvSpace() {
-        return invSpace;
+        int invSpace = 0;
+        for (Drugs e: this.drugList) {
+            invSpace += e.getAmount();
+        }
+        for (Guns e: this.gunList) {
+            invSpace++;
+        }
+        this.invSpace = invSpace;
+        return this.invSpace;
     }
 
     public void setInvSpace(int invSpace) {
