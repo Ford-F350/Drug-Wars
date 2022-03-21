@@ -28,7 +28,7 @@ public class GameController {
         System.out.println("press enter to start");
         //cheat code
         if (scan.nextLine().equals("a")) {
-            customStart(0, 0);
+            customStart();
         } else {
             getInstance();
         }
@@ -44,42 +44,47 @@ public class GameController {
     //TODO: make builder class for decision trees
     public void dayStart() {
         if (this.daysPast > 0) {
-            int i = RandomAction.getRandomActionInstance().getRandomDrugIndex();
-            RandomAction.getRandomActionInstance().actionRoll(TrenchCoat.getTrenchCoatInstance().getDrugsAtIndex(i));
+            //random action at start of every day
         }
+        //moves to main menu where player can choose what to do in day
+        mainMenu();
 
     }
 
-    private static void customStart(int i, int i1) {
-        try {
-            getInstance();
-            if (i == 0) {
-                System.out.println("Enter Player Health");
-            }
-            i = 1;
-            if (i1 == 0) {
-                single_instance.getCoat().setHealth(scan.nextInt());
-            }
-            i1 = 1;
-            if (i == 1) {
-                System.out.println("Enter Player Inventory Space");
-            }
-            i = 2;
-            if (i1 == 1) {
-                single_instance.getCoat().setInvSpace(scan.nextInt());
-            }
-            i1 = 2;
-            if (i == 2) {
-                System.out.println("Enter Starting Money");
-            }
-            i = 3;
-            if (i1 == 2) {
-                single_instance.getCoat().setMoney(scan.nextInt());
-            }
-            i1 = 3;
+    private void mainMenu() {
+    }
 
-        } catch (Exception e) {
-            customStart(i, i1);
+    private static void customStart() {
+        getInstance();
+
+        System.out.println("Enter Player Health");
+        while (true) {
+            try {
+                single_instance.getCoat().setHealth(Math.max(0, scan.nextInt()));
+            } catch (Exception e) {
+
+            }
+            break;
+        }
+
+        System.out.println("Enter Player Inventory Space");
+        while (true) {
+            try {
+                single_instance.getCoat().setInvSpace(Math.max(0, scan.nextInt()));
+            } catch (Exception e) {
+
+            }
+            break;
+        }
+
+        System.out.println("Enter Starting Money");
+        while (true) {
+            try {
+                single_instance.getCoat().setMoney(scan.nextInt());
+            } catch (Exception e) {
+
+            }
+            break;
         }
     }
 

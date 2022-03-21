@@ -107,6 +107,7 @@ public class TrenchCoat {
                 System.out.println("Adding items to TrenchCoat");
                 return -1;
             } else {
+                System.out.println("Adding items that can be fit");
                 return this.maxInvSpace - getInvSpace();
             }
         }
