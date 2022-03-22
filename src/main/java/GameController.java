@@ -52,6 +52,12 @@ public class GameController {
     }
 
     private void mainMenu() {
+
+    }
+
+    // creates menu with important stats for the user
+    private void generateMenu() {
+
     }
 
     private static void customStart() {

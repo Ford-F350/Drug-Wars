@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Drugs {
 
     private Market market;
@@ -28,6 +30,10 @@ public class Drugs {
 
     public void updateDrug() {
         market.updateMarket();
+    }
+
+    public ArrayList<Integer> getPricesList() {
+        return this.market.getPricesList();
     }
 
     public int getAmount() {

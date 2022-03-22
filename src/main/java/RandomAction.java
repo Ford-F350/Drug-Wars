@@ -23,65 +23,52 @@ public class RandomAction {
 
     //TODO: Clean up Random Action class to be more easily usable and understandable
 
-    public int actionRoll(Drugs drugs, TrenchCoat coat) {
-        if (actionRoll(coat) == -1) {
-           if(this.actionRoll(drugs) == -1) {
-               return -1;
-           }
-           return 2;
-        }
-        return 1;
+    //
+    public void actionRoll(Drugs drugs, TrenchCoat coat) {
+
     }
 
-    public int actionRoll(Drugs drugs) {
+    public void actionRoll(Drugs drugs) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             priceGain(drugs);
             this.eventsRolled++;
-            return 1;
         } else if (i == 2){
             priceLoss(drugs);
             this.eventsRolled++;
-            return 2;
         }
         this.eventsRolled++;
-        return -1;
     }
 
-    public int actionRoll(TrenchCoat inv) {
+    public void actionRoll(TrenchCoat inv) {
         int i = (int)(Math.random() * 10) + 1;
         if (i == 1) {
             moneyGain(inv);
             this.eventsRolled++;
-            return 1;
         } else if (i == 2){
             moneyLoss(inv);
             this.eventsRolled++;
-            return 2;
         } else if (i == 3){
             drugGain(inv);
             this.eventsRolled++;
-            return 3;
         } else if (i == 4){
             drugLoss(inv);
             this.eventsRolled++;
-            return 4;
         }
         this.eventsRolled++;
-        return -1;
     }
 
-    public int copRoll() {
+    //TODO:build cop fighting method
+    public void copRoll() {
         int i = (int)(Math.random() * 10)+ 1;
         if (i == 1) {
-            copFight();
+            copCount();
             this.eventsRolled++;
         }
         this.eventsRolled++;
-        return -1;
     }
 
-    private int copFight() {
+    private int copCount() {
         int i = (int) (Math.random() * 3) + 1;
         if (i == 1) {
             return 1;
@@ -97,7 +84,19 @@ public class RandomAction {
         return -1;
     }
 
+    //TODO: rewrite random actions with text and to tell the user what they got
+
+    // pass in all strings to chose from as one string separated by "~"
+    private String pickRandomSentence(String sentences) {
+        String[] splitSentences = sentences.split("/");
+        int randomInt = (int) (Math.random() * splitSentences.length);
+        return splitSentences[randomInt];
+    }
+
     private void drugGain(TrenchCoat inv) {
+        System.out.print(pickRandomSentence("While walking around you come across some drugs on the ground/" +
+                "You find a dead man and search his pockets to find some drugs/" +
+                "A dog approaches you with some drugs in its mouth"));
         int i = getRandomDrugIndex();
         inv.getDrugsAtIndex(i).setAmount(inv.getDrugsAtIndex(i).getAmount() + ((int)(Math.random() * 10) + 1));
     }

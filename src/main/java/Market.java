@@ -1,4 +1,5 @@
 import java.lang.Math;
+import java.util.ArrayList;
 
 public class Market {
 
@@ -7,10 +8,13 @@ public class Market {
 
     private int price;
     private double lean;
+    private ArrayList<Integer> pricesList;
 
     public Market() {
         this.price = 1;
         this.lean = 0;
+        this.pricesList = new ArrayList<>();
+        this.pricesList.add(1);
     }
 
     public Market(int price, double lean) {
@@ -20,6 +24,8 @@ public class Market {
             this.price = price;
         }
         this.lean = lean;
+        this.pricesList = new ArrayList<>();
+        this.pricesList.add(this.price);
     }
 
     // new price = currentPrice + (random number between (-0.5 and 0.5) + lean) * CurrentPrice
@@ -29,6 +35,7 @@ public class Market {
         if (price == 0) {
             price += 5;
         }
+        this.pricesList.add(this.price);
     }
 
     public int getPrice() {
@@ -45,5 +52,9 @@ public class Market {
 
     public void setLean(double lean) {
         this.lean = lean;
+    }
+
+    public ArrayList<Integer> getPricesList() {
+        return pricesList;
     }
 }

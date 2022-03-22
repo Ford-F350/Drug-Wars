@@ -18,6 +18,7 @@ public class TrenchCoat {
     private static Scanner scan = new Scanner(System.in);
 
 
+    //TODO:implement system to store money safely in bank
     private TrenchCoat() {
         this.money = 2000;
         this.gunList = new ArrayList<>();
